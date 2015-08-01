@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body { 
+        min-width: 300px; 
+        overflow-x: hidden; 
+        font-family: Arial, sans-serif; 
+        font-size: 12px; 
+      }
+      input, textarea { 
+        width: 420px; 
+      }
+      input#save { 
+        font-weight: bold; width: auto; 
+      }
+    </style>
+    
+    <script src="jquery.min.js"></script>
+    <script src="popup.js"></script>
+  
+  </head>
+    
+  <body>
+    
+    <div id="status">
+      Loading...
+    </div>
+     
+    <div id="data_form" style="border:solid thin; border-color:grey; padding:3px;background-color:#F2F2F2">
+    
+      What about it? <br/>
+      <input type="text" id="key" style="margin-top:10px;width:305px;" />
+      
+      <input type="hidden" id="hd_title" />
+      <input type="hidden" id="hd_url" />
+
+      <div id="excerpt" style="border:solid thin;border-color:grey;background-color:#CEE6FF;margin-top:10px;margin-bottom:10px;width:300px;padding:5px;"></div>
+
+      <button id="save_data">Save</button>
+    
+    </div>
+  </body>
+</html>
+

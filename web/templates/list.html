@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>List</title>
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.css">
+    
+    <style>
+      table.dataTable tr.odd {
+        background-color: #F2F2F2;
+        cursor: pointer;
+      }
+      table.dataTable tr.even {
+        background-color: white;
+        cursor: pointer;
+      }
+      table.display tbody tr:nth-child(even):hover td{
+        background-color: #E6F3FF !important;
+      }
+      table.display tbody tr:nth-child(odd):hover td{
+        background-color: #E6F3FF !important;
+      }
+
+    </style>
+
+  </head>
+  <body>
+    <table id="table_id" class="display">
+      <thead>
+        <tr>
+          <th>About</th>
+          <th>Excerpt</th>
+          <th>From</th>
+          <th>CreatedOn</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for x in data %}
+          <tr rid="{{ x }}">
+            <td>{{ data[x]['about'] }}</td>
+            <td>{{ data[x]['excerpt'] }}</td>
+            <td>{{ data[x]['title'] }}</td>
+            <td><span style="display:none;">{{ ts[x] }}</span>{{ data[x]['created_time'] }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        
+        var table = $('#table_id').DataTable({
+          'columns': [
+            {'width': '10%'},
+            {'width': '45%'},
+            {'width': '30%'},
+            {'width': '15%'}
+          ]
+        });
+        
+        $('#table_id tbody').on('click', 'tr', function(){
+          
+          /*
+          if ($(this).hasClass('selected')){
+              $(this).removeClass('selected');
+          }
+          else {
+              table.$('tr.selected').removeClass('selected');
+              $(this).addClass('selected');
+          }
+          */
+          var rid =  $(this).attr('rid');
+          window.location.href = '/detail_excerpt/' + rid;
+
+        });
+     
+        $('#button').click(function(){
+          table.row('.selected').remove().draw(false);
+        });
+
+      });
+    </script>
+
+  </body>
+</html>
+

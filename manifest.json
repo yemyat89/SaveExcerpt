@@ -1,0 +1,19 @@
+{
+    "manifest_version": 2,
+    "name": "Tag Some Pages",
+    "description": "Tag and save the websites you like",
+    "version": "0.1",
+    "background": {
+        "scripts": ["event.js"],
+        "persistent": false
+    },
+    "browser_action": {
+        "default_icon": "icon.png",
+        "default_popup": "popup.html"
+    },
+    "permissions": [
+        "tabs", 
+        "http://*/*", 
+        "https://*/*"
+    ]
+}
