@@ -1,15 +1,76 @@
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.css">
+
+<style>
+  table.dataTable tr.odd {
+    cursor: pointer;
+  }
+  table.dataTable tr.even {
+    background-color: #F2F2F2;
+    cursor: pointer;
+  }
+  table.display tbody tr:nth-child(even):hover td{
+    background-color: #E6F3FF !important;
+  }
+  table.display tbody tr:nth-child(odd):hover td{
+    background-color: #E6F3FF !important;
+  }
+
+</style>
+
 <div style="width:800px;">
-  <h2>{{ d['about'] }}</h2>
+  <h1>{{ d['about'] }}</h3>
 
   <p>
-    <div style="background-color:#EFEFFB;padding:5px;">
+    <div style="background-color:#E0F2F7;border:solid thin;border-color:grey;padding:10px;margin-bottom:20px;">
       {{ d['excerpt'] }}
     </div>
   </p>
 
-  <hr/>
-
   <p>From: <a href="{{ d['url'] }}" target="_blank">{{ d['title'] }}</a></p>
 
   <p>Created On: 20/07/2015 12:33</p>
+  
+  {% if rel %}
+    <hr/>
+    
+    <h3>Other Excerpts from the same source</h3>
+    <div style="background-color:#E0F2F7;padding:10px;border:solid thin;border-color:grey;">
+      <table id="dt_table">
+        <thead>
+          <tr>
+            <td>About</td>
+            <td>Excerpt</td>
+            <td>Created On</td>
+          </tr>
+        </thead>
+        <tbody>
+          {% for x in rel %}
+            <tr>
+              <td>{{ x['about'] }}</td>
+              <td>{{ x['excerpt'] }}</td>
+              <td>{{ x['created_time'] }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+  {% endif %}
+
 </div>
+
+<script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+      
+    var table = $('#dt_table').DataTable({
+      'columns': [
+        {'width': '15%'},
+        {'width': '70%'},
+        {'width': '15%'}
+      ]
+    });
+  });
+</script>

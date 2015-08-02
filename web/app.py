@@ -94,7 +94,11 @@ def list_excerpts():
 @app.route('/detail_excerpt/<rid>')
 def detail(rid):
     d = excerpt_db.find_one({'id': int(rid)})
-    return render_template('detail_excerpt.html', d=d) 
+    rel_url = [x for x in excerpt_db.find({"$and": [{"url": d['url']}, {"id": {"$ne": d['id']}}]})]
+    for i, x in enumerate(rel_url):
+        g = datetime.fromtimestamp(x['created_time'])
+        rel_url[i]['created_time'] = g.strftime('%d/%m/%Y %H:%M')
+    return render_template('detail_excerpt.html', d=d, rel=rel_url)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0') 
