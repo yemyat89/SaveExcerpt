@@ -6,7 +6,6 @@
     
     <style>
       table.dataTable tr.odd {
-        background-color: #F2F2F2;
         cursor: pointer;
       }
       table.dataTable tr.even {
@@ -35,11 +34,11 @@
       </thead>
       <tbody>
         {% for x in data %}
-          <tr rid="{{ x }}">
-            <td>{{ data[x]['about'] }}</td>
-            <td>{{ data[x]['excerpt'] }}</td>
-            <td>{{ data[x]['title'] }}</td>
-            <td><span style="display:none;">{{ ts[x] }}</span>{{ data[x]['created_time'] }}</td>
+          <tr rid="{{ x['id'] }}">
+            <td>{{ x['about'] }}</td>
+            <td>{{ x['excerpt'] }}</td>
+            <td>{{ x['title'] }}</td>
+            <td><span style="display:none;">{{ ts[loop.index0] }}</span>{{ x['created_time'] }}</td>
           </tr>
         {% endfor %}
       </tbody>
@@ -56,7 +55,8 @@
             {'width': '45%'},
             {'width': '30%'},
             {'width': '15%'}
-          ]
+          ],
+          'order': [[3,'desc']]
         });
         
         $('#table_id tbody').on('click', 'tr', function(){
@@ -75,9 +75,9 @@
 
         });
      
-        $('#button').click(function(){
-          table.row('.selected').remove().draw(false);
-        });
+        //$('#button').click(function(){
+        //  table.row('.selected').remove().draw(false);
+        //});
 
       });
     </script>
