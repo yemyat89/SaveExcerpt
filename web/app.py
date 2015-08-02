@@ -5,13 +5,14 @@ import time
 from copy import deepcopy
 import json
 from pymongo import MongoClient
-
+#from flask.ext.login import (LoginManager, UserMixin, login_required,
+#                            login_user, current_user, logout_user)
 
 username = None
 password = None
 
 lines = []
-with open('../auth.data', 'r') as f:
+with open('auth.data', 'r') as f:
     for l in f:
         lines.append(l[:-1])
 
@@ -45,7 +46,7 @@ def add_header(response):
 
 @app.route('/')
 def index():
-    return 'Hello'
+    return render_template('index.html')
 
 
 @app.route('/save', methods=['POST'])
@@ -101,4 +102,5 @@ def detail(rid):
     return render_template('detail_excerpt.html', d=d, rel=rel_url)
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0') 
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port) #app.run(debug=True, host='0.0.0.0')
